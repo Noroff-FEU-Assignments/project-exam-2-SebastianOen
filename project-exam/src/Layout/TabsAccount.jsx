@@ -1,12 +1,11 @@
 import React from "react";
-import Posts from "../AllPosts";
+import Posts from "../components/AllPosts";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import styles from "./TabsAccount.module.css";
-import CreatePost from "../CreatePost";
-import ProfileList from "../ProfileList";
-import MyProfile from "../MyProfile";
-
+import CreatePost from "../components/CreatePost";
+import ProfileList from "../components/ProfileList";
+import MyProfile from "../components/MyProfile";
 const TabsAccount = () => {
   return (
     <div>

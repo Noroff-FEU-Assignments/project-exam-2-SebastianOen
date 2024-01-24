@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-//import Logout from "../Logout";
+import Logout from "../components/Logout";
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -10,6 +10,7 @@ const Header = () => {
       <Navbar className="bg-body-tertiary">
         <Container>
           <Navbar.Brand className={styles.brandLogo}>Safebook</Navbar.Brand>
+          <Logout />
         </Container>
       </Navbar>
     </div>
