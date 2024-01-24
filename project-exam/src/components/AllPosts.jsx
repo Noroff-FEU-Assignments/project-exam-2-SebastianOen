@@ -7,6 +7,7 @@ import Image from "react-bootstrap/Image";
 import styles from "./allposts.module.css";
 import Comments from "./Comments";
 import Spinner from "react-bootstrap/Spinner";
+import DeleteButton from "./DeleteButton";
 
 const apiUrl = "https://api.noroff.dev/api/v1/social/posts";
 
@@ -38,20 +39,26 @@ const Posts = () => {
     return <Spinner animation="grow" />;
   }
 
+  const accName = localStorage.getItem("AccName");
+
   const rows = data?.map((result, index) => (
     <Container className={styles.indPosts} key={index}>
       <Row>
         <Col className={styles.author}>
-          <Image
-            src={
-              result.author.avatar ||
-              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-            }
-            className={styles.avatarImg}
-            roundedCircle
-          />
-
-          <p className={styles.authorName}>{result.author.name}</p>
+          <div className={styles.authorContainer}>
+            <Image
+              src={
+                result.author.avatar ||
+                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+              }
+              className={styles.avatarImg}
+              roundedCircle
+            />
+            <p className={styles.authorName}>{result.author.name}</p>
+          </div>
+          {result.author.name === accName && (
+            <DeleteButton postId={result.id} postAuthor={result.author.name} />
+          )}
         </Col>
       </Row>
       <Row>
