@@ -32,7 +32,7 @@ const fetchPosts = async () => {
 };
 
 const Posts = () => {
-  const { data, isLoading, isError } = useQuery("posts", fetchPosts);
+  const { data, isLoading } = useQuery("posts", fetchPosts);
 
   if (isLoading) {
     return <Spinner animation="grow" />;
