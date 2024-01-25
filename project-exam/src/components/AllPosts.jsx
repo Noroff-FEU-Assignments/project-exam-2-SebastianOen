@@ -8,6 +8,10 @@ import styles from "./allposts.module.css";
 import Comments from "./Comments";
 import Spinner from "react-bootstrap/Spinner";
 import DeleteButton from "./DeleteButton";
+import CommentBody from "./CreateComment";
+import UpdateModal from "./UpdatePost";
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
 
 const apiUrl = "https://api.noroff.dev/api/v1/social/posts";
 
@@ -33,7 +37,16 @@ const fetchPosts = async () => {
 };
 
 const Posts = () => {
-  const { data, isLoading, isError } = useQuery("posts", fetchPosts);
+  const { data, isLoading } = useQuery("posts", fetchPosts);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   if (isLoading) {
     return <Spinner animation="grow" />;
@@ -56,6 +69,11 @@ const Posts = () => {
             />
             <p className={styles.authorName}>{result.author.name}</p>
           </div>
+
+          {result.author.name === accName && (
+            <Button onClick={openModal}>Update Post</Button>
+          )}
+          {showModal && <UpdateModal onClose={closeModal} postId={result.id} />}
           {result.author.name === accName && (
             <DeleteButton postId={result.id} postAuthor={result.author.name} />
           )}
@@ -75,6 +93,11 @@ const Posts = () => {
       <Row>
         <Col>
           <Comments comments={result.comments} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <CommentBody postId={result.id} />
         </Col>
       </Row>
     </Container>
