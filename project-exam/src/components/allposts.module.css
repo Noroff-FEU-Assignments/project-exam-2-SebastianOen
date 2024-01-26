@@ -10,7 +10,13 @@
 .author {
   display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: space-between;
+}
+
+.authorContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .postMediaContainer {
