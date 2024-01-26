@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import styles from "./ProfileList.module.css";
 import Row from "react-bootstrap/Row";
@@ -36,8 +35,6 @@ const ProfileList = () => {
   const handleNavigate = (props) => {
     navigate(`/profile?id=${props}`);
   };
-
-  console.log(data);
 
   if (isLoading) {
     return <Spinner animation="grow" />;

@@ -7,9 +7,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import FollowUnfollow from "../components/FollowUnfollow";
 
 const fetchProfile = async () => {
   const accessToken = localStorage.getItem("token");
+
   const apiUrl = "https://api.noroff.dev/api/v1/social/profiles";
 
   const queryString = document.location.search;
@@ -38,14 +40,16 @@ const fetchProfile = async () => {
 
 const SingleProfile = () => {
   const { data, isLoading } = useQuery("profile", fetchProfile);
+  const accName = localStorage.getItem("AccName");
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate(`/home`);
   };
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  console.log(data.followers);
 
   return (
     <div>
@@ -77,6 +81,15 @@ const SingleProfile = () => {
           roundedCircle
         />
         <h1>{data.name}</h1>
+
+        <FollowUnfollow
+          name={data.name}
+          follow={
+            data.followers.some((follower) => follower.name === accName)
+              ? "unfollow"
+              : "follow"
+          }
+        />
       </div>
     </div>
   );

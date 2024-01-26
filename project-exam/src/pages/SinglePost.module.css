@@ -1,0 +1,67 @@
+.avatarImg {
+  width: 120px;
+  height: 120px;
+  margin-right: 50px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.authorContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.postMediaContainer {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  display: flex;
+  justify-content: center;
+}
+
+.postMedia {
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  max-width: 600px;
+  max-height: 400px;
+}
+
+.bodyText {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.bodyTextTitle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  background-color: rgba(3, 138, 255, 1);
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 2em;
+}
+
+.indPosts {
+  margin-top: 40px;
+  margin-bottom: 120px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.authorName {
+  font-size: 1.5rem;
+  color: white;
+  background-color: rgba(3, 138, 255, 1);
+  padding: 10px 30px 10px 30px;
+  border-radius: 30px;
+}

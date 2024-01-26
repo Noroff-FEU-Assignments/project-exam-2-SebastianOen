@@ -12,6 +12,10 @@ import CommentBody from "./CreateComment";
 import UpdateModal from "./UpdatePost";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Reactions from "./Reactions";
 
 const apiUrl = "https://api.noroff.dev/api/v1/social/posts";
 
@@ -39,6 +43,7 @@ const fetchPosts = async () => {
 const Posts = () => {
   const { data, isLoading } = useQuery("posts", fetchPosts);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const openModal = () => {
     setShowModal(true);
@@ -52,7 +57,13 @@ const Posts = () => {
     return <Spinner animation="grow" />;
   }
 
+  const handleNavigate = (props) => {
+    navigate(`/post?id=${props}`);
+  };
+
   const accName = localStorage.getItem("AccName");
+
+  console.log(data);
 
   const rows = data?.map((result, index) => (
     <Container className={styles.indPosts} key={index}>
@@ -69,13 +80,25 @@ const Posts = () => {
             />
             <p className={styles.authorName}>{result.author.name}</p>
           </div>
-
           {result.author.name === accName && (
-            <Button onClick={openModal}>Update Post</Button>
-          )}
-          {showModal && <UpdateModal onClose={closeModal} postId={result.id} />}
-          {result.author.name === accName && (
-            <DeleteButton postId={result.id} postAuthor={result.author.name} />
+            <DropdownButton id="dropdown-basic-button" title="Options">
+              <Dropdown.Item>
+                {result.author.name === accName && (
+                  <Button onClick={openModal}>Update Post</Button>
+                )}
+              </Dropdown.Item>
+              {showModal && (
+                <UpdateModal onClose={closeModal} postId={result.id} />
+              )}
+              <Dropdown.Item>
+                {result.author.name === accName && (
+                  <DeleteButton
+                    postId={result.id}
+                    postAuthor={result.author.name}
+                  />
+                )}
+              </Dropdown.Item>
+            </DropdownButton>
           )}
         </Col>
       </Row>
@@ -91,6 +114,12 @@ const Posts = () => {
         </Col>
       </Row>
       <Row>
+        <Col className={styles.postMediaContainer}>
+          <Reactions id={result.id} />
+          <p> 👍 </p> <p>{result._count.reactions}</p>
+        </Col>
+      </Row>
+      <Row>
         <Col>
           <Comments comments={result.comments} />
         </Col>
@@ -98,6 +127,7 @@ const Posts = () => {
       <Row>
         <Col>
           <CommentBody postId={result.id} />
+          <Button onClick={() => handleNavigate(result.id)}>View Post</Button>
         </Col>
       </Row>
     </Container>
