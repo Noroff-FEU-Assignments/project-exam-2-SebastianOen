@@ -23,3 +23,7 @@
   background-color: rgba(3, 138, 255, 0.8);
   color: white;
 }
+
+.indProfiles:hover {
+  cursor: pointer;
+}

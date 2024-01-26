@@ -1,0 +1,21 @@
+.bannerContainer {
+  display: grid;
+  place-items: center;
+  background-color: rgba(3, 138, 255, 0.8);
+}
+
+.avatarContainer {
+  display: grid;
+  place-items: center;
+}
+
+.profileAvatar {
+  width: 100px;
+  height: 100px;
+}
+
+.editOptions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

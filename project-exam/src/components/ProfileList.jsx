@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Spinner from "react-bootstrap/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const apiUrl = "https://api.noroff.dev/api/v1/social/profiles";
 
@@ -30,11 +31,13 @@ const fetchProfiles = async () => {
 const ProfileList = () => {
   const { data, isLoading, isError } = useQuery("profiles", fetchProfiles);
 
-  useEffect(() => {
-    if (data) {
-      console.log("Profiles data:", data);
-    }
-  }, [data]);
+  const navigate = useNavigate();
+
+  const handleNavigate = (props) => {
+    navigate(`/profile?id=${props}`);
+  };
+
+  console.log(data);
 
   if (isLoading) {
     return <Spinner animation="grow" />;
@@ -49,7 +52,11 @@ const ProfileList = () => {
 
   const profileRows = data?.map((result, index) => (
     <div>
-      <Container className={styles.indProfiles} key={index}>
+      <Container
+        className={styles.indProfiles}
+        key={index}
+        onClick={() => handleNavigate(result.name)}
+      >
         <Row>
           <Col className={styles.author}>
             <Image
