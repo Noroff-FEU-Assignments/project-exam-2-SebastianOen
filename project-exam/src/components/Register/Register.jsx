@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
-import styles from "./register.module.css";
+import styles from "./Register.module.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import { apiUrl } from "../../Constants/ApiUrl";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,16 +23,13 @@ const Register = () => {
   };
 
   const registerEvent = useMutation(async () => {
-    const response = await fetch(
-      "https://api.noroff.dev/api/v1/social/auth/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    );
+    const response = await fetch(`${apiUrl}auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
     return response.json();
   });

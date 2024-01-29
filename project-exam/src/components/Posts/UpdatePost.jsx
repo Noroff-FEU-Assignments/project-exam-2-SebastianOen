@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { apiUrl } from "../../Constants/ApiUrl";
 
 const UpdateModal = ({ postId, title, body, tags, media, onClose }) => {
   const [updatedData, setUpdatedData] = useState({
@@ -16,22 +17,19 @@ const UpdateModal = ({ postId, title, body, tags, media, onClose }) => {
 
   const updatePost = useMutation(
     async () => {
-      const response = await fetch(
-        `https://api.noroff.dev/api/v1/social/posts/${postId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({
-            title: updatedData.title,
-            body: updatedData.body,
-            tags: updatedData.tags.split(", ").map((tag) => tag.trim()),
-            media: updatedData.media,
-          }),
-        }
-      );
+      const response = await fetch(`${apiUrl}posts/${postId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          title: updatedData.title,
+          body: updatedData.body,
+          tags: updatedData.tags.split(", ").map((tag) => tag.trim()),
+          media: updatedData.media,
+        }),
+      });
 
       return response.json();
     },

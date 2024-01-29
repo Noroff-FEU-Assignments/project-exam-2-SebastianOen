@@ -5,13 +5,12 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import styles from "./MyProfile.module.css";
 import Spinner from "react-bootstrap/Spinner";
-
-const apiUrl = "https://api.noroff.dev/api/v1/social/profiles/";
+import { apiUrl } from "../../Constants/ApiUrl";
 
 const fetchProfile = async (accName) => {
   const accessToken = localStorage.getItem("token");
 
-  const response = await fetch(apiUrl + accName, {
+  const response = await fetch(apiUrl + "profiles/" + accName, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
@@ -24,7 +23,7 @@ const fetchProfile = async (accName) => {
 const updateProfile = async ({ accName, avatar, banner }) => {
   const accessToken = localStorage.getItem("token");
 
-  const response = await fetch(apiUrl + accName + "/media", {
+  const response = await fetch(apiUrl + "profiles/" + accName + "/media", {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${accessToken}`,

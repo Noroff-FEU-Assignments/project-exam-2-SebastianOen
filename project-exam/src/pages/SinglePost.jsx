@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import Image from "react-bootstrap/Image";
 import styles from "./SinglePost.module.css";
-import Header from "../Layout/Header";
+import Header from "../components/Layout/Header";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -11,14 +11,16 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import UpdateModal from "../components/UpdatePost";
-import DeleteButton from "../components/DeleteButton";
-import CommentBody from "../components/CreateComment";
-import Comments from "../components/Comments";
+import UpdateModal from "../components/Posts/UpdatePost";
+import DeleteButton from "../components/Posts/DeleteButton";
+import CommentBody from "../components/Comments/CreateComment";
+import Comments from "../components/Comments/Comments";
+import Reactions from "../components/Comments/Reactions";
+import InsertEmoticonRoundedIcon from "@mui/icons-material/InsertEmoticonRounded";
+import { apiUrl } from "../Constants/ApiUrl";
 
 const fetchPost = async () => {
   const accessToken = localStorage.getItem("token");
-  const apiUrl = "https://api.noroff.dev/api/v1/social/posts";
 
   const queryString = document.location.search;
   const params = new URLSearchParams(queryString);
@@ -30,7 +32,7 @@ const fetchPost = async () => {
     _reactions: true,
   });
 
-  const urlWithParams = `${apiUrl}/${postId}?${queryParams.toString()}`;
+  const urlWithParams = `${apiUrl}posts/${postId}?${queryParams.toString()}`;
 
   const response = await fetch(urlWithParams, {
     headers: {
@@ -124,6 +126,17 @@ const SinglePost = () => {
         <Row>
           <Col className={styles.postMediaContainer}>
             <Image src={data.media} className={styles.postMedia} fluid />
+          </Col>
+        </Row>
+        <Row>
+          <Col className={styles.likeContainer}>
+            <Reactions id={data.id} />
+            <div className={styles.emoteContainer}>
+              <InsertEmoticonRoundedIcon className={styles.like} />{" "}
+              <div className={styles.counter}>
+                <p>{data._count.reactions}</p>
+              </div>
+            </div>
           </Col>
         </Row>
         <Row>

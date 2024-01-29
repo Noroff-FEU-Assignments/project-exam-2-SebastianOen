@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../Layout/Header";
-import TabsAccount from "../Layout/TabsAccount";
+import Header from "../components/Layout/Header";
+import TabsAccount from "../components/Layout/TabsAccount";
 
 const Home = () => {
   return (

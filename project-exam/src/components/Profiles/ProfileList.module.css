@@ -22,8 +22,10 @@
   border-radius: 10px;
   background-color: rgba(3, 138, 255, 0.8);
   color: white;
+  transition: all 0.2s ease-in-out;
 }
 
 .indProfiles:hover {
   cursor: pointer;
+  transform: scale(1.05);
 }

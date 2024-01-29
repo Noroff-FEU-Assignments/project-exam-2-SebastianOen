@@ -2,17 +2,16 @@ import React from "react";
 import { useQuery } from "react-query";
 import Image from "react-bootstrap/Image";
 import styles from "./SingleProfile.module.css";
-import Header from "../Layout/Header";
+import Header from "../components/Layout/Header";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import FollowUnfollow from "../components/FollowUnfollow";
+import FollowUnfollow from "../components/Profiles/FollowUnfollow";
+import { apiUrl } from "../Constants/ApiUrl";
 
 const fetchProfile = async () => {
   const accessToken = localStorage.getItem("token");
-
-  const apiUrl = "https://api.noroff.dev/api/v1/social/profiles";
 
   const queryString = document.location.search;
   const params = new URLSearchParams(queryString);
@@ -24,7 +23,7 @@ const fetchProfile = async () => {
     _posts: true,
   });
 
-  const urlWithParams = `${apiUrl}/${profileName}?${queryParams.toString()}`;
+  const urlWithParams = `${apiUrl}profiles/${profileName}?${queryParams.toString()}`;
 
   const response = await fetch(urlWithParams, {
     headers: {

@@ -1,8 +1,8 @@
 import React from "react";
-import Home from "./pages/Home";
-import LoginPage from "./pages/LoginPage";
-import SingleProfile from "./pages/SingleProfile";
-import SinglePost from "./pages/SinglePost";
+import Home from "./Pages/Home";
+import LoginPage from "./Pages/LoginPage";
+import SingleProfile from "./Pages/SingleProfile";
+import SinglePost from "./Pages/SinglePost";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {

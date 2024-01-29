@@ -1,22 +1,40 @@
 .avatarImg {
   width: 120px;
   height: 120px;
-  margin-right: 50px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   margin-top: 25px;
   margin-bottom: 25px;
+  transition: all 0.2s ease-in-out;
+}
+
+.avatarImg:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .author {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.optionsButton {
+  position: absolute;
+  right: 120px;
+}
+
+@media only screen and (max-width: 768px) {
+  .optionsButton {
+    position: absolute;
+    right: 10px;
+  }
 }
 
 .authorContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .postMediaContainer {
@@ -41,12 +59,11 @@
 .bodyTextTitle {
   margin-top: 20px;
   margin-bottom: 20px;
-  color: white;
-  background-color: rgba(3, 138, 255, 1);
-  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 .indPosts {
@@ -64,4 +81,34 @@
   background-color: rgba(3, 138, 255, 1);
   padding: 10px 30px 10px 30px;
   border-radius: 30px;
+}
+
+.likeContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+  color: rgba(3, 138, 255, 1);
+}
+
+.emoteContainer {
+  display: flex;
+  font-size: 1rem;
+}
+
+.counter {
+  display: grid;
+  place-items: center;
+  background-color: rgba(3, 138, 255, 1);
+  align-items: center;
+  color: white;
+  border-radius: 50px;
+  height: 15px;
+  width: 15px;
+  font-size: 0.6rem;
+  margin-top: 10px;
+}
+
+.like {
+  margin-top: 20px;
 }

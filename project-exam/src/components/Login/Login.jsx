@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import styles from "./Login.module.css";
 import Button from "react-bootstrap/Button";
+import { apiUrl } from "../../Constants/ApiUrl";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,16 +24,13 @@ const Login = () => {
 
   const loginEvent = useMutation(
     async () => {
-      const response = await fetch(
-        "https://api.noroff.dev/api/v1/social/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${apiUrl}auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (!response.ok) {
         throw new Error("Login failed");

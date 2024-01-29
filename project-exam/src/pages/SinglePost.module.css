@@ -65,3 +65,33 @@
   padding: 10px 30px 10px 30px;
   border-radius: 30px;
 }
+
+.likeContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+  color: rgba(3, 138, 255, 1);
+}
+
+.emoteContainer {
+  display: flex;
+  font-size: 1rem;
+}
+
+.counter {
+  display: grid;
+  place-items: center;
+  background-color: rgba(3, 138, 255, 1);
+  align-items: center;
+  color: white;
+  border-radius: 50px;
+  height: 15px;
+  width: 15px;
+  font-size: 0.6rem;
+  margin-top: 10px;
+}
+
+.like {
+  margin-top: 20px;
+}

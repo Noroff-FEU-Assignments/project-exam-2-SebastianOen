@@ -1,6 +1,6 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
-import styles from "./comments.module.css";
+import styles from "./Comments.module.css";
 
 const Comments = (props) => {
   const list = props.comments?.map((item) => (
