@@ -48,7 +48,7 @@ const SingleProfile = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(data.followers);
+  console.log(data);
 
   return (
     <div>
@@ -80,6 +80,7 @@ const SingleProfile = () => {
           roundedCircle
         />
         <h1>{data.name}</h1>
+        <p>Followers: {data._count.followers}</p>
 
         <FollowUnfollow
           name={data.name}

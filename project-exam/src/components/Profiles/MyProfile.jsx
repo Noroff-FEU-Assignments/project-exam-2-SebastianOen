@@ -105,6 +105,7 @@ const Profile = () => {
           roundedCircle
         />
         <h1>{data.name}</h1>
+        <p>Followers: {data._count.followers}</p>
       </div>
 
       {editMode ? (

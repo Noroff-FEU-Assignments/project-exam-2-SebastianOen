@@ -67,8 +67,6 @@ const Posts = () => {
 
   const accName = localStorage.getItem("AccName");
 
-  console.log(data);
-
   const rows = data?.map((result, index) => (
     <Container className={styles.indPosts} key={index}>
       <Row>
