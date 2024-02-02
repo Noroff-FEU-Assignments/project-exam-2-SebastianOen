@@ -1,7 +1,7 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Login from "../components/Login";
-import Register from "../components/Register";
+import Login from "../components/Login/Login";
+import Register from "../components/Register/Register";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import styles from "./LoginPage.module.css";

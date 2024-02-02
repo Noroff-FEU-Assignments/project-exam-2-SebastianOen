@@ -5,15 +5,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import styles from "./allposts.module.css";
-import Comments from "./Comments";
+import Comments from "../Comments/Comments";
 import Spinner from "react-bootstrap/Spinner";
 import DeleteButton from "./DeleteButton";
-import CommentBody from "./CreateComment";
+import CommentBody from "../Comments/CreateComment";
 import UpdateModal from "./UpdatePost";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-
-const apiUrl = "https://api.noroff.dev/api/v1/social/posts";
+import { useNavigate } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Reactions from "../Comments/Reactions";
+import InsertEmoticonRoundedIcon from "@mui/icons-material/InsertEmoticonRounded";
+import { apiUrl } from "../../Constants/ApiUrl";
 
 const fetchPosts = async () => {
   const accessToken = localStorage.getItem("token");
@@ -24,7 +28,7 @@ const fetchPosts = async () => {
     _reactions: true,
   });
 
-  const urlWithParams = `${apiUrl}?${queryParams.toString()}`;
+  const urlWithParams = `${apiUrl}posts?${queryParams.toString()}`;
 
   const response = await fetch(urlWithParams, {
     headers: {
@@ -39,6 +43,7 @@ const fetchPosts = async () => {
 const Posts = () => {
   const { data, isLoading } = useQuery("posts", fetchPosts);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const openModal = () => {
     setShowModal(true);
@@ -51,6 +56,14 @@ const Posts = () => {
   if (isLoading) {
     return <Spinner animation="grow" />;
   }
+
+  const handleNavigatePost = (props) => {
+    navigate(`/post?id=${props}`);
+  };
+
+  const handleNavigateProfile = (props) => {
+    navigate(`/profile?id=${props}`);
+  };
 
   const accName = localStorage.getItem("AccName");
 
@@ -66,17 +79,32 @@ const Posts = () => {
               }
               className={styles.avatarImg}
               roundedCircle
+              onClick={() => handleNavigateProfile(result.author.name)}
             />
             <p className={styles.authorName}>{result.author.name}</p>
           </div>
-
-          {result.author.name === accName && (
-            <Button onClick={openModal}>Update Post</Button>
-          )}
-          {showModal && <UpdateModal onClose={closeModal} postId={result.id} />}
-          {result.author.name === accName && (
-            <DeleteButton postId={result.id} postAuthor={result.author.name} />
-          )}
+          <div className={styles.optionsButton}>
+            {result.author.name === accName && (
+              <DropdownButton id="dropdown-basic-button" title="Options">
+                <Dropdown.Item>
+                  {result.author.name === accName && (
+                    <Button onClick={openModal}>Update Post</Button>
+                  )}
+                </Dropdown.Item>
+                {showModal && (
+                  <UpdateModal onClose={closeModal} postId={result.id} />
+                )}
+                <Dropdown.Item>
+                  {result.author.name === accName && (
+                    <DeleteButton
+                      postId={result.id}
+                      postAuthor={result.author.name}
+                    />
+                  )}
+                </Dropdown.Item>
+              </DropdownButton>
+            )}
+          </div>
         </Col>
       </Row>
       <Row>
@@ -91,6 +119,17 @@ const Posts = () => {
         </Col>
       </Row>
       <Row>
+        <Col className={styles.likeContainer}>
+          <Reactions id={result.id} />
+          <div className={styles.emoteContainer}>
+            <InsertEmoticonRoundedIcon className={styles.like} />{" "}
+            <div className={styles.counter}>
+              <p>{result._count.reactions}</p>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row>
         <Col>
           <Comments comments={result.comments} />
         </Col>
@@ -98,6 +137,13 @@ const Posts = () => {
       <Row>
         <Col>
           <CommentBody postId={result.id} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Button onClick={() => handleNavigatePost(result.id)}>
+            View Post
+          </Button>
         </Col>
       </Row>
     </Container>

@@ -29,6 +29,7 @@ const CommentBody = ({ postId }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["comments", postId]);
+        queryClient.invalidateQueries("posts");
 
         setPostComment({
           body: "",

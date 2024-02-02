@@ -1,14 +1,13 @@
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import Button from "react-bootstrap/esm/Button";
-
-const apiUrl = "https://api.noroff.dev/api/v1/social/posts/";
+import { apiUrl } from "../../Constants/ApiUrl";
 
 const deletePost = async (postId) => {
   const accName = localStorage.getItem("AccName");
   const accessToken = localStorage.getItem("token");
 
-  const response = await fetch(apiUrl + postId, {
+  const response = await fetch(apiUrl + "posts" + "/" + postId, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${accessToken}`,

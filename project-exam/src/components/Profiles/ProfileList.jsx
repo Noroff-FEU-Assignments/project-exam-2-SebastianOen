@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import styles from "./ProfileList.module.css";
 import Row from "react-bootstrap/Row";
@@ -8,15 +7,14 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
-
-const apiUrl = "https://api.noroff.dev/api/v1/social/profiles";
+import { apiUrl } from "../../Constants/ApiUrl";
 
 const fetchProfiles = async () => {
   const accessToken = localStorage.getItem("token");
 
   const queryParams = new URLSearchParams({});
 
-  const urlWithParams = `${apiUrl}?${queryParams.toString()}`;
+  const urlWithParams = `${apiUrl}profiles/?${queryParams.toString()}`;
 
   const response = await fetch(urlWithParams, {
     headers: {
@@ -36,8 +34,6 @@ const ProfileList = () => {
   const handleNavigate = (props) => {
     navigate(`/profile?id=${props}`);
   };
-
-  console.log(data);
 
   if (isLoading) {
     return <Spinner animation="grow" />;

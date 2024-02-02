@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import Logout from "../components/Logout";
+import Logout from "../Logout/Logout";
 import styles from "./Header.module.css";
 
 const Header = () => {

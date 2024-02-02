@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import styles from "./CreatePost.module.css";
+import { apiUrl } from "../../Constants/ApiUrl";
 
 const PostForm = () => {
   const [postData, setPostData] = useState({
@@ -15,17 +16,14 @@ const PostForm = () => {
 
   const postEvent = useMutation(
     async () => {
-      const response = await fetch(
-        "https://api.noroff.dev/api/v1/social/posts",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(postData),
-        }
-      );
+      const response = await fetch(`${apiUrl}posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(postData),
+      });
 
       if (!response.ok) {
         throw new Error("Sorry, something went wrong");
