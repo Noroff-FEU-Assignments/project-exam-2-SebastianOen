@@ -1,3 +1,43 @@
+### NOROFF EMAIL ACCOUNT NEEDED TO REGISTER USER (xxx@stud.noroff.no)
+
+# Structure
+
+Component folders are marked with what they are related to. Such as "Comments", holds everything around user reactions to posts (example: Commenting, reacting to posts).
+
+We use React-query for our requests (useMutate) and cache that data with useQuery. This makes updating and rerendering neat and tidy.
+
+Storing values in localStorage for authentication.
+
+# Components and pages
+
+Components have the first letter as a capital letter (MyComponent.jsx).
+
+Most of the website is navigated in tabs, react-router is used between login and content-page. Also for single posts and single profiles (except users own profile).
+
+# Styles
+
+Components use modules for css (example: MyComponent.module.css)
+
+Mainly using Bootstrap-react default styles with slight modifications.
+
+# Constants
+
+Constants folder for API.
+
+# Layout
+
+Layout folder for layout on the page such as Tabs and Header.
+
+# Tasks are mapped in Trello
+
+# First install
+
+To install the dependancies and get all the library versions.
+
+### `npm install `
+
+# React
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
