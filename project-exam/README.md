@@ -1,3 +1,5 @@
+### NOROFF EMAIL ACCOUNT NEEDED TO REGISTER USER (xxx@stud.noroff.no)
+
 # Structure
 
 Component folders are marked with what they are related to. Such as "Comments", holds everything around user reactions to posts (example: Commenting, reacting to posts).
@@ -10,11 +12,11 @@ Storing values in localStorage for authentication.
 
 Components have the first letter as a capital letter (MyComponent.jsx).
 
-Components use modules for css (example: MyComponent.module.css)
-
 Most of the website is navigated in tabs, react-router is used between login and content-page. Also for single posts and single profiles (except users own profile).
 
 # Styles
+
+Components use modules for css (example: MyComponent.module.css)
 
 Mainly using Bootstrap-react default styles with slight modifications.
 
